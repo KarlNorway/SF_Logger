@@ -1,0 +1,6 @@
+﻿  MyForm.cpp
+  loggForm.cpp
+  Generating Code...
+  loggForm.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+  SF_Logger.vcxproj -> C:\Users\Karl\Documents\PU kurs advc C++\Kode fra kurset\Dag2 (onsdag0401)\SF_Logger\Debug\SF_Logger.exe
+  SF_Logger.vcxproj -> C:\Users\Karl\Documents\PU kurs advc C++\Kode fra kurset\Dag2 (onsdag0401)\SF_Logger\Debug\SF_Logger.pdb (Partial PDB)
