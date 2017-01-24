@@ -116,16 +116,22 @@ namespace SF_Logger {
 
 		}
 #pragma endregion
-	private: System::Void btnEnd_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void btnEnd_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		
+	String^ message = "Er du sikker på at du vil avslutte?";
+	String^ caption = "Avslutt";
+	MessageBoxButtons buttons = MessageBoxButtons::YesNo;
+	System::Windows::Forms::DialogResult result;
+	result = MessageBox::Show(this, message, caption, buttons, MessageBoxIcon::Question);
+	if (result == System::Windows::Forms::DialogResult::Yes)
+	{
+		// Closes the parent form.
+		this->Close();
 	}
-			 private:System::Void btnNew_Click(System::Object^  sender, System::EventArgs^  e) {
-				 loggForm ^ formNew = gcnew loggForm;
+	}
+ private:System::Void btnNew_Click(System::Object^  sender, System::EventArgs^  e); // {
+		/*		 loggForm ^ formNew = gcnew loggForm;
 				 formNew->Show();
-
-			 }
-	
-			 
+			 }*/
 };
 }

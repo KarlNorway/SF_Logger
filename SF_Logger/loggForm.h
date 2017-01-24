@@ -1,13 +1,11 @@
 #pragma once
 #include <string>
 #include <msclr\marshal.h> 
-//#include <ctime>
 #include <time.h>
 #include <locale.h> 
-#include <windows.h>
-
-
-
+#include <fstream>
+#include <Windows.h>
+#include <atlstr.h>
 
 namespace SF_Logger {
 
@@ -31,6 +29,15 @@ namespace SF_Logger {
 			//TODO: Add the constructor code here
 			//
 		}
+		
+	public: System::Windows::Forms::TextBox^  txtFrom;
+	public: System::Windows::Forms::TextBox^  txtTo;
+	public: System::Windows::Forms::TextBox^  txtMessage;
+	public: System::Windows::Forms::Button^  btnSave;
+	private: System::Windows::Forms::Label^  lblDTG;
+	private: System::Windows::Forms::Label^  lblFrom;
+	private: System::Windows::Forms::Label^  lblTo;
+	private: System::Windows::Forms::Label^  lblMessage;
 
 	protected:
 		/// <summary>
@@ -43,16 +50,6 @@ namespace SF_Logger {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^  lblFrom;
-	protected:
-	private: System::Windows::Forms::Label^  lblTo;
-	private: System::Windows::Forms::Label^  lblMessage;
-	private: System::Windows::Forms::TextBox^  txtFrom;
-	private: System::Windows::Forms::TextBox^  txtTo;
-	private: System::Windows::Forms::TextBox^  txtMessage;
-	private: System::Windows::Forms::Button^  btnSave;
-	private: System::Windows::Forms::Label^  lblDTG;
-
 	private:
 
 		
@@ -139,6 +136,7 @@ namespace SF_Logger {
 			this->txtMessage->Name = L"txtMessage";
 			this->txtMessage->Size = System::Drawing::Size(305, 195);
 			this->txtMessage->TabIndex = 5;
+			this->txtMessage->TextChanged += gcnew System::EventHandler(this, &loggForm::txtMessage_TextChanged);
 			// 
 			// btnSave
 			// 
@@ -154,14 +152,14 @@ namespace SF_Logger {
 			// 
 			// lblDTG
 			// 
-			this->lblDTG->AutoSize = true;
+			/*this->lblDTG->AutoSize = true;
 			this->lblDTG->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblDTG->Location = System::Drawing::Point(63, 9);
 			this->lblDTG->Name = L"lblDTG";
 			this->lblDTG->Size = System::Drawing::Size(54, 19);
 			this->lblDTG->TabIndex = 7;
-			this->lblDTG->Text = L"label1";
+			this->lblDTG->Text = L"label1";*/
 			//this->lblDTG->Click += gcnew System::EventHandler(this, &loggForm::lblDTG_Click);
 			// 
 			// loggForm
@@ -185,31 +183,37 @@ namespace SF_Logger {
 
 		}
 #pragma endregion
-	private: System::Void btnSave_Click(System::Object^  sender_save, System::EventArgs^  e) {
-		using namespace System;
-		using namespace System::Runtime::InteropServices;
-
-		std::string fromStr = (const char*)(Marshal::StringToHGlobalAnsi(txtFrom->Text)).ToPointer();
-		std::string toStr = (const char*)(Marshal::StringToHGlobalAnsi(txtTo->Text)).ToPointer();
-		std::string fromMessage = (const char*)(Marshal::StringToHGlobalAnsi(txtMessage->Text)).ToPointer();
-		System::String^ output = gcnew String(toStr.c_str());
-		output += gcnew String(fromStr.c_str());
-		time_t rawtime;
-		struct tm * timeinfo;
-
-		time(&rawtime);
-		timeinfo = localtime(&rawtime);
-
-		std::string strDTG = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday) + " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
-		System::String^ DTG = gcnew String(strDTG.c_str());
-		output += DTG;
-		txtMessage->Text = output;
-		this->txtFrom->ResetText();
-		this -> txtTo->ResetText();
-		//this->txtMessage->ResetText();
-		std::string saveCSV = strDTG + "," + fromStr + "," + toStr + "," + fromMessage;
-	}
-
-
+		private:
+    System::Void txtMessage_TextChanged(System::Object^  sender_txtMessChange, System::EventArgs^  e);
+	System::Void btnSave_Click(System::Object^  sender_save, System::EventArgs^  e); // {
+	//	using namespace System;
+	//	using namespace System::Runtime::InteropServices;
+	//	std::string fromStr = (const char*)(Marshal::StringToHGlobalAnsi(txtFrom->Text)).ToPointer();
+	//	std::string toStr = (const char*)(Marshal::StringToHGlobalAnsi(txtTo->Text)).ToPointer();
+	//	std::string fromMessage = (const char*)(Marshal::StringToHGlobalAnsi(txtMessage->Text)).ToPointer();
+	//	this->txtFrom->Clear();
+	//	this->txtTo->Clear();
+	//	this->txtMessage->Clear();
+	//	/*System::String^ output = gcnew String(toStr.c_str());
+	//	output += gcnew String(fromStr.c_str());*/
+	//	time_t rawtime;
+	//	struct tm * timeinfo;
+	//	time(&rawtime);
+	//	timeinfo = localtime(&rawtime);
+	//	std::string date = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday);
+	//	std::string strDTG = date +  " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
+	//	/*System::String^ DTG = gcnew String(strDTG.c_str());
+	//	output += DTG;  */
+	//	//txtMessage->Text = output;
+	//	std::string saveCSV = strDTG + "," + fromStr + "," + toStr + "," + fromMessage;
+	//	std::string fileName = "Logg-" + date;
+	//	std::cout << fileName << std::endl;
+	//	std::cout << saveCSV << std::endl;
+	//	saveLogFile(fileName, saveCSV);
+	//}
+	//		 
+			
 };
+
+
 }

@@ -1,35 +1,45 @@
 #include "loggForm.h"
+#include "MyForm.h"
 #include <string>
 #include <ctime>
-#include <iostream>
+//#include <iostream>
+#include <fstream>
+#include <Windows.h>
+#include <atlstr.h>
+#include "DataBase.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
+using namespace SF_Logger;
 
-[STAThread]//leave this as is
-void mainNew() {
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
-	SF_Logger::loggForm loggForm;
-	Application::Run(%loggForm);
+
+System::Void SF_Logger::loggForm::txtMessage_TextChanged(System::Object ^ sender_txtMessChange, System::EventArgs ^ e)
+{
+	using namespace System;
+	using namespace System::Runtime::InteropServices;
+	SF_Logger::loggForm LF;
+	std::string fromMessage = (const char*)(Marshal::StringToHGlobalAnsi(LF.txtMessage->Text)).ToPointer();
+	return System::Void();
 }
 
-std::string getDTG() {
+System::Void loggForm::btnSave_Click(System::Object^  sender_save, System::EventArgs^  e) {
+	using namespace System;
+	using namespace System::Runtime::InteropServices;
+	//SF_Logger::loggForm LF;
+	std::string fromStr = (const char*)(Marshal::StringToHGlobalAnsi(loggForm::txtFrom->Text)).ToPointer();
+	std::string toStr = (const char*)(Marshal::StringToHGlobalAnsi(loggForm::txtTo->Text)).ToPointer();
+	std::string fromMessage = (const char*)(Marshal::StringToHGlobalAnsi(loggForm::txtMessage->Text)).ToPointer();
+	loggForm::txtFrom->Clear();
+	loggForm::txtTo->Clear();
+	loggForm::txtMessage->Clear();
 	time_t rawtime;
 	struct tm * timeinfo;
-
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	printf("Current local time and date: %s", asctime(timeinfo));
-
-	// print various components of tm structure.
-	std::cout << "Year" << 1900 + timeinfo->tm_year << std::endl;
-	std::cout << "Month: " << 1 + timeinfo->tm_mon << std::endl;
-	std::cout << "Day: " << timeinfo->tm_mday << std::endl;
-	std::cout << "Time: " << 1 + timeinfo->tm_hour << ":";
-	std::cout << 1 + timeinfo->tm_min << ":";
-	std::cout << 1 + timeinfo->tm_sec << std::endl;
-	std::string strDTG = std::to_string(1900 + timeinfo->tm_year)+ "-" + std::to_string(1 + timeinfo->tm_mon)+ "-" + std::to_string(timeinfo->tm_mday) + " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
-	return strDTG;
-
+	std::string date = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday);
+	std::string strDTG = date + " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
+	std::string fileName = "Logg-" + date;
+	LogData logg(fileName);
+	logg.addEntry(strDTG, fromStr, toStr, fromMessage);
+	MessageBox::Show("The operation has been completed ", "Notification", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
 }
