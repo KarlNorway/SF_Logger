@@ -37,6 +37,7 @@ namespace SF_Logger {
 	private: System::Windows::Forms::Label^  lblDTG;
 	private: System::Windows::Forms::Label^  lblFrom;
 	private: System::Windows::Forms::Label^  lblTo;
+	private: System::Windows::Forms::Button^  btnShow;
 	private: System::Windows::Forms::Label^  lblMessage;
 
 	protected:
@@ -73,6 +74,7 @@ namespace SF_Logger {
 			this->txtMessage = (gcnew System::Windows::Forms::TextBox());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->lblDTG = (gcnew System::Windows::Forms::Label());
+			this->btnShow = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// lblFrom
@@ -152,15 +154,20 @@ namespace SF_Logger {
 			// 
 			// lblDTG
 			// 
-			/*this->lblDTG->AutoSize = true;
-			this->lblDTG->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lblDTG->Location = System::Drawing::Point(63, 9);
+			this->lblDTG->Location = System::Drawing::Point(0, 0);
 			this->lblDTG->Name = L"lblDTG";
-			this->lblDTG->Size = System::Drawing::Size(54, 19);
-			this->lblDTG->TabIndex = 7;
-			this->lblDTG->Text = L"label1";*/
-			//this->lblDTG->Click += gcnew System::EventHandler(this, &loggForm::lblDTG_Click);
+			this->lblDTG->Size = System::Drawing::Size(100, 23);
+			this->lblDTG->TabIndex = 0;
+			// 
+			// btnShow
+			// 
+			this->btnShow->Location = System::Drawing::Point(209, 36);
+			this->btnShow->Name = L"btnShow";
+			this->btnShow->Size = System::Drawing::Size(40, 40);
+			this->btnShow->TabIndex = 7;
+			this->btnShow->Text = L"Show";
+			this->btnShow->UseVisualStyleBackColor = true;
+			this->btnShow->Click += gcnew System::EventHandler(this, &loggForm::btnShow_Click);
 			// 
 			// loggForm
 			// 
@@ -168,6 +175,7 @@ namespace SF_Logger {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(338, 434);
+			this->Controls->Add(this->btnShow);
 			this->Controls->Add(this->lblDTG);
 			this->Controls->Add(this->btnSave);
 			this->Controls->Add(this->txtMessage);
@@ -186,6 +194,7 @@ namespace SF_Logger {
 		private:
     System::Void txtMessage_TextChanged(System::Object^  sender_txtMessChange, System::EventArgs^  e);
 	System::Void btnSave_Click(System::Object^  sender_save, System::EventArgs^  e); // {
+	System::Void btnShow_Click(System::Object^  sender_show, System::EventArgs^  e);
 	//	using namespace System;
 	//	using namespace System::Runtime::InteropServices;
 	//	std::string fromStr = (const char*)(Marshal::StringToHGlobalAnsi(txtFrom->Text)).ToPointer();
@@ -213,6 +222,7 @@ namespace SF_Logger {
 	//}
 	//		 
 			
+
 };
 
 

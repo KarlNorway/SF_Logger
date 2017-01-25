@@ -11,6 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace SF_Logger;
+extern LogData * g_pLogData;
 
 
 System::Void SF_Logger::loggForm::txtMessage_TextChanged(System::Object ^ sender_txtMessChange, System::EventArgs ^ e)
@@ -38,8 +39,12 @@ System::Void loggForm::btnSave_Click(System::Object^  sender_save, System::Event
 	timeinfo = localtime(&rawtime);
 	std::string date = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday);
 	std::string strDTG = date + " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
-	std::string fileName = "Logg-" + date;
-	LogData logg(fileName);
-	logg.addEntry(strDTG, fromStr, toStr, fromMessage);
+	/*std::string fileName = "Logg-" + date;
+	LogData logg(fileName);*/
+	g_pLogData -> addEntry(strDTG, fromStr, toStr, fromMessage);
 	MessageBox::Show("The operation has been completed ", "Notification", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
+}
+
+System::Void loggForm::btnShow_Click(System::Object^  sender_show, System::EventArgs^  e) {
+	g_pLogData->readTable();
 }
