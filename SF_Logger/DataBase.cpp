@@ -36,7 +36,7 @@ LogData::LogData(const std::string &name)
 	
 
 	/* Create SQL statement */
-	sql = "CREATE TABLE LOG("  \
+	sql = "CREATE TABLE IF NOT EXISTS LOG("  \
 		"ID INTEGER PRIMARY KEY     AUTOINCREMENT," \
 		"DTG          TEXT    NOT NULL," \
 		"FRA          TEXT    NOT NULL," \
@@ -117,9 +117,9 @@ bool LogData::addEntry(const std::string &DTG, const std::string &from, const st
 	return true;
 }
 
-//std::string LogData::getName()const {
-//	return dbName;
-//}
+std::string LogData::getName()const {
+	return dbName;
+}
 
 bool LogData::readTable() {
 	sqlite3 *db;
@@ -153,4 +153,6 @@ bool LogData::readTable() {
 	sqlite3_close(db);
 	return true;
 }
-
+//bool LogData::readDataBase() {
+//	
+//}

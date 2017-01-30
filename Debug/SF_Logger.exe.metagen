@@ -1,5 +1,6 @@
   SF_Logger.loggForm.resources - Embedded, ContainedInManifestFile, 
   SF_Logger.MyForm.resources - Embedded, ContainedInManifestFile, 
+  SF_Logger.MyForm1.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly SF_Logger, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -26,3 +27,10 @@ Class SF_Logger.loggForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class SF_Logger.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class SF_Logger.MyForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.DataGridView dataGridView1 : Public, Static
+  Methods:
+    readDataBase(): PrivateScope, Public, Static, HideBySig

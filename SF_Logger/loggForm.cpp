@@ -1,5 +1,6 @@
 #include "loggForm.h"
 #include "MyForm.h"
+#include "MyForm1.h"
 #include <string>
 #include <ctime>
 //#include <iostream>
@@ -38,7 +39,7 @@ System::Void loggForm::btnSave_Click(System::Object^  sender_save, System::Event
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 	std::string date = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday);
-	std::string strDTG = date + " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
+	std::string strDTG = date + " " + std::to_string(timeinfo->tm_hour) + ":" + std::to_string(timeinfo->tm_min) + ":" + std::to_string(timeinfo->tm_sec);
 	/*std::string fileName = "Logg-" + date;
 	LogData logg(fileName);*/
 	g_pLogData -> addEntry(strDTG, fromStr, toStr, fromMessage);
@@ -47,4 +48,7 @@ System::Void loggForm::btnSave_Click(System::Object^  sender_save, System::Event
 
 System::Void loggForm::btnShow_Click(System::Object^  sender_show, System::EventArgs^  e) {
 	g_pLogData->readTable();
+	//MyForm1 ^ showForm = gcnew MyForm1;
+	//showForm->Show();
+	//SF_Logger::MyForm1::readDataBase();
 }

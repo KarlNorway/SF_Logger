@@ -1,7 +1,5 @@
-﻿  MyForm.cpp
-  loggForm.cpp
-  Generating Code...
-  DataBase.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+﻿  DataBase.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+MyForm1.obj : warning LNK4248: unresolved typeref token (0100001E) for 'sqlite3'; image may not run
 DataBase.obj : warning LNK4248: unresolved typeref token (01000017) for 'sqlite3'; image may not run
   SF_Logger.vcxproj -> C:\SW prosjekter\C++\SF_Logger\Debug\SF_Logger.exe
   SF_Logger.vcxproj -> C:\SW prosjekter\C++\SF_Logger\Debug\SF_Logger.pdb (Partial PDB)

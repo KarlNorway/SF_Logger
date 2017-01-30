@@ -193,37 +193,7 @@ namespace SF_Logger {
 #pragma endregion
 		private:
     System::Void txtMessage_TextChanged(System::Object^  sender_txtMessChange, System::EventArgs^  e);
-	System::Void btnSave_Click(System::Object^  sender_save, System::EventArgs^  e); // {
+	System::Void btnSave_Click(System::Object^  sender_save, System::EventArgs^  e); 
 	System::Void btnShow_Click(System::Object^  sender_show, System::EventArgs^  e);
-	//	using namespace System;
-	//	using namespace System::Runtime::InteropServices;
-	//	std::string fromStr = (const char*)(Marshal::StringToHGlobalAnsi(txtFrom->Text)).ToPointer();
-	//	std::string toStr = (const char*)(Marshal::StringToHGlobalAnsi(txtTo->Text)).ToPointer();
-	//	std::string fromMessage = (const char*)(Marshal::StringToHGlobalAnsi(txtMessage->Text)).ToPointer();
-	//	this->txtFrom->Clear();
-	//	this->txtTo->Clear();
-	//	this->txtMessage->Clear();
-	//	/*System::String^ output = gcnew String(toStr.c_str());
-	//	output += gcnew String(fromStr.c_str());*/
-	//	time_t rawtime;
-	//	struct tm * timeinfo;
-	//	time(&rawtime);
-	//	timeinfo = localtime(&rawtime);
-	//	std::string date = std::to_string(1900 + timeinfo->tm_year) + "-" + std::to_string(1 + timeinfo->tm_mon) + "-" + std::to_string(timeinfo->tm_mday);
-	//	std::string strDTG = date +  " " + std::to_string(1 + timeinfo->tm_hour) + ":" + std::to_string(1 + timeinfo->tm_min) + ":" + std::to_string(1 + timeinfo->tm_sec);
-	//	/*System::String^ DTG = gcnew String(strDTG.c_str());
-	//	output += DTG;  */
-	//	//txtMessage->Text = output;
-	//	std::string saveCSV = strDTG + "," + fromStr + "," + toStr + "," + fromMessage;
-	//	std::string fileName = "Logg-" + date;
-	//	std::cout << fileName << std::endl;
-	//	std::cout << saveCSV << std::endl;
-	//	saveLogFile(fileName, saveCSV);
-	//}
-	//		 
-			
-
 };
-
-
 }
