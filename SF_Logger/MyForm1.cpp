@@ -6,42 +6,26 @@
 
 extern LogData * g_pLogData;
 
-static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
-	int i;
-	for (i = 0; i<argc; i++) {
-		//printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-		//SF_Logger::MyForm1::dataGridView1->ro;
-
-	}
-	//printf("\n");
-	return 0;
-}
-
-bool SF_Logger::MyForm1::readDataBase() {
+void InitializeDataGridView()
+{
+	int  rc;
 	sqlite3 *db;
-	char *zErrMsg = 0;
-	int rc;
-	char *sql;
-	const char* data = "Callback function called";
-	std::string dbName = g_pLogData -> getName();
-
+	std::string name = g_pLogData->getName();
 	/* Open database */
-	rc = sqlite3_open(dbName.c_str(), &db);
+	rc = sqlite3_open(name.c_str(), &db);
+	//rc = sqlite3_prepare(db, sql, strlen(sql), &stmt, NULL);//compile sql to byte code
 	if (rc) {
-		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-		return(0);
+		//fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+		//return(0);
 	}
 	else {
-		fprintf(stderr, "Opened database successfully\n");
+		//fprintf(stdout, "Opened database successfully\n");
 	}
-
-	/* Create SQL statement */
-	sql = "SELECT * from LOG";
-
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		System::Windows::Forms::MessageBox::Show("The operation has been completed ", "Notification", System::Windows::Forms::MessageBoxButtons::OKCancel, System::Windows::Forms::MessageBoxIcon::Asterisk);
+	char * sql = "SELECT * from LOG";
+	int nByte = sizeof(sql);
+	int dbRead = sqlite3_prepare_v2(db, sql, nByte, );
+	char *zErrMsg = 0;
+	if (dbRead != SQLITE_OK) {
 		//fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
 	}
@@ -49,6 +33,6 @@ bool SF_Logger::MyForm1::readDataBase() {
 		//fprintf(stdout, "Operation done successfully\n");
 	}
 	sqlite3_close(db);
-	return true;
 }
+
 

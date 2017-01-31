@@ -129,9 +129,6 @@ private: System::Void btnEnd_Click(System::Object^  sender, System::EventArgs^  
 		this->Close();
 	}
 	}
- private:System::Void btnNew_Click(System::Object^  sender, System::EventArgs^  e); // {
-		/*		 loggForm ^ formNew = gcnew loggForm;
-				 formNew->Show();
-			 }*/
+ private:System::Void btnNew_Click(System::Object^  sender, System::EventArgs^  e); 
 };
 }

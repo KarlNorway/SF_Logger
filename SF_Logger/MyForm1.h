@@ -83,10 +83,13 @@ namespace SF_Logger {
 			this->ResumeLayout(false);
 
 		}
-		
 
-		
-
+	
 #pragma endregion
 	};
+
+	/*int main()
+	{
+		Application::Run(gcnew Form1);
+	}*/
 }
