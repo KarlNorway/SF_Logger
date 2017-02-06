@@ -26,7 +26,7 @@ namespace SF_Logger {
 			//TODO: Add the constructor code here
 			//
 		}
-		static bool readDataBase();
+		//static bool readDataBase();
 
 	protected:
 		/// <summary>
@@ -81,7 +81,6 @@ namespace SF_Logger {
 			this->Text = L"MyForm1";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
-
 		}
 
 	
