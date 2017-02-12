@@ -76,18 +76,7 @@ bool LogData::addEntry(const std::string &DTG, const std::string &from, const st
 	
 	int iid;
 	sqlite3_last_insert_rowid;
-	//char *sqlGetId = "SELECT MAX(ID) FROM LOG";
-	//rc = sqlite3_exec(db, sqlGetId, callback, 0, &zErrMsg);
-	//if (rc != SQLITE_OK) {
-	//	fprintf(stderr, "SQL error: %s\n", zErrMsg);
-	//	sqlite3_free(zErrMsg);
-	//}
-	//else {
-	//	fprintf(stdout, "Records created successfully\n");
-	//}
-	//int iid = rc;
 	std::cout << "ID no: " << sqlite3_last_insert_rowid << std::endl;
-
 
 	std::cout << DTG << std::endl;
 	std::cout << from << std::endl;
@@ -153,6 +142,3 @@ bool LogData::readTable() {
 	sqlite3_close(db);
 	return true;
 }
-//bool LogData::readDataBase() {
-//	
-//}
